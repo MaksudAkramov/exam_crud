@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, _user_has_perm, _user_has_module_perms, PermissionsMixin
-from uuid import uuid4
 from user.managers import UserManager
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=50,primary_key=True)
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=50,unique=True)
     email = models.EmailField()
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user

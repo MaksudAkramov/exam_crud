@@ -1,18 +1,18 @@
+from re import I
 from django.db import models
-from datetime import date
+from django.utils import timezone
 
-# Create your models here.
+from user.models import Account
+
 CHOICES =[     
-    ("AVG_HEARTBEAT", 'avg_heartbeat'),
-    ("CALORIES_CONSUMED", 'calories_consumed'),
-    ("SLEEP_HOURS", 'sleep_hours'),
-    ("MORNING_PULSE", 'morning_pulse')]
+    ("avg_heartbeat", 'AVG_HEARTBEAT'),
+    ("calories_consumed", 'CALORIES_CONSUMED'),
+    ("sleep_hours", 'SLEEP_HOURS'),
+    ("morning_pulse", 'MORNING_PULSE')
+]
 
-
-class MetricDataPoint(models.Model):
-    x_data_type=models.CharField(max_length=100,choices= CHOICES)
-    y_data_type=models.CharField(max_length=100,choices= CHOICES)
-    x_date = models.DateField(default=date.today())
-    y_date = models.DateField(default=date.today())
-    x_values = models.FloatField()
-    y_values = models.FloatField()
+class MetricsData(models.Model):
+    user_id = models.ForeignKey(Account, on_delete=models.CASCADE)
+    data_type=models.CharField(max_length=100, choices=CHOICES)
+    date = models.DateField(default=timezone.now)
+    value = models.FloatField()
