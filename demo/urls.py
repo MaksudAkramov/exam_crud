@@ -22,7 +22,6 @@ from django.urls import path,include
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('user.urls')),
-    path('calculate/', include('metricdatapoint.urls')),
+    path('student/', include('student.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
