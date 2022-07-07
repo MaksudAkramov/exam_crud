@@ -31,5 +31,5 @@ services:
       - app-volumes:/app
     env_file:
       - .env
-    command: ["manage.py", "create_superuser"]
+    command: ["manage.py", "runserver"]
     
