@@ -13,12 +13,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Student',
+            name='Car',
             fields=[
                 ('id', models.AutoField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('frist_name', models.CharField(max_length=50)),
-                ('last_name', models.CharField(max_length=50)),
-                ('faculty', models.CharField(max_length=50)),
+                ('manufacturer', models.CharField(max_length=50)),
+                ('model', models.CharField(max_length=50)),
+                ('year_of_manufacturing', models.DateField(null=True)),
             ],
         ),
     ]
