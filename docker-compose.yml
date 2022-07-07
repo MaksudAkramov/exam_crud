@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+
+  migrator:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - app-volumes:/app
+    entrypoint: python
+    command: ["manage.py", "migrate"]
+
+  createsuperuser:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - app-volumes:/app
+    entrypoint: python
+    command: ["manage.py", "create_superuser"]
+    depends_on:
+      - migrator
+
+  web:
+    build: .
+    ports:
+    - 8008:8008
+    - 8000:8000
+    volumes:
+      - app-volumes:/app
+    env_file:
+      - .env
+    command: ["manage.py", "create_superuser"]
+    
